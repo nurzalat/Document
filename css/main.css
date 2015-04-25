@@ -1,0 +1,149 @@
+body {
+    background: #eee;
+    font-family: Verdana, Tahoma, Arial;
+    font-size: 10pt;
+    margin: 0;
+    padding: 15px;
+}
+
+/* оберточный контейнер колонок */
+
+#columns {
+    display: table;
+    width: 100%;
+    -moz-box-sizing: border-box;      /* фикс проблемы для Firefox       */
+    -webkit-box-sizing: border-box;   /* фикс для старых Chrome и Safari */
+    box-sizing: border-box;           /* не поддерживается в CSS2        */
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* колонки */
+
+#columns > div,
+#columns > noindex > div {
+    min-height: 450px;
+    display: table-cell;
+    vertical-align: top;
+    width: auto;
+    position: relative;
+    -moz-box-sizing: border-box;      /* фикс проблемы для Firefox       */
+    -webkit-box-sizing: border-box;   /* фикс для старых Chrome и Safari */
+    box-sizing: border-box;           /* не поддерживается в CSS2        */
+}
+
+/* ограничиваем ширину боковых колонок */
+
+#columns > #left,
+#columns > noindex > #left {
+    min-height: 450px;
+    max-width: 300px;
+    min-width: 300px;
+    width: 300px;
+}
+
+#columns > #right,
+#columns > noindex > #right {
+    min-height: 450px;
+    max-width: 350px;
+    min-width: 300px;
+    width: 300px;
+    overflow: hidden;
+}
+
+#columns > #center,
+#columns > noindex > #center {
+    min-height: 450px;
+}
+
+/* раскраска колонок */
+
+#left {
+    margin-right: 12px;
+    background: #1E90FF;
+    padding: 0 15px 15px 15px;
+}
+
+#center {
+    margin-right: 12px;
+    background: #fff;
+    padding: 0 15px 15px 15px;
+}
+#center h1, #right h2, #left h2{text-align:center;}
+
+#right {
+    background: #1E90FF;
+    padding: 0 15px 15px 15px;
+}
+
+/* раскраска шапки и подвала */
+
+#header {
+    background: #1E90FF;
+    padding: 15px;
+    margin-bottom: 12px;
+    height: 100px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+#footer, #topmenu {
+    background: #4F4F4F;
+    padding: 15px;
+    height: 100px;
+    margin-top: 12px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+/* ссылки внизу */
+
+#powered {
+    background: #bbb;
+    color: #444;
+    font-size: 8pt;
+    margin: 15px 0 0 0;
+    padding: 0 15px;
+    line-height: 18pt;
+}
+#powered > a {
+    color: #22579e;
+    text-decoration: none;
+    white-space: nowrap;
+    margin: 0 10px;
+}
+#powered > a:hover {
+    text-decoration: underline;
+}
+#powered > #counters {
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    opacity: 0.01;
+}
+#powered > #counters * {
+    opacity: 0.01;
+}
+
+#powered, #header, #columns, #footer, #topmenu{-webkit-box-shadow: 0 0 0px #b1b1b1;
+    -moz-box-shadow: 0 0 0px #b1b1b1;
+    box-shadow: 0 0 0px #b1b1b1;}
+
+#footer li, #topmenu li{
+    list-style: none;
+    margin-right: 15px;
+    display: inline;}
+#footer span.symfony{float: right;}
+div.content{padding-bottom: 20px;}
+#topmenu{height:20px; margin-top:0; margin-bottom: 12px; padding-top:0;background:#fff}
+div#topmenu a{text-decoration: none;}
+div#topmenu a:hover{color:#22579e;}
+div#powered > a:hover{color:#08f;}
+#powered span{float: right;}
+#header h2{text-align: left; font-size: 40px;color:white;}
+div#left, div#right, div#center {border-top: 0px #fff solid;}
+#right_text
+{
+    float: left;
+    margin: 10px;
+}
