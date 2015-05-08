@@ -11,8 +11,21 @@ function db_connect()
 $conn = db_connect();
 $username = $_SESSION['session_username'];
 $result ="select * from usertable where username='$username'";
+$sqlquery ="select name, surname from usertable where username='$username'";
 $sql = mysqli_query($conn,$result);
+$standard = mysqli_query($conn,$sqlquery);
 $resultmode = mysqli_fetch_assoc($sql);
+$standardmode = mysqli_fetch_assoc($standard);
+$manname = $standardmode['name'];
+$mansurname = $standardmode['surname'];
+$manfullname = $manname." ".$mansurname;
+if ($resultmode['job']<3){
+    $standardquery ="select name, surname from usertable where manage='$manfullname'";
+    $managerquery = $conn->query($standardquery);
+    while ($row = $managerquery->fetch_assoc()) {
+        $managermode[] = $row;
+    }
+}
 if (!$result) {
     throw new Exception('Could not execute query.');
 }
@@ -60,8 +73,7 @@ default; $faculty = 'Empty';break;
 </head>
 <body>
 <div id="topmenu">
-    <a href="../index.html">Авторизация</a> |
-    <a href="../files/register.html">Регистрация</a>
+    <a href="logout.php">Выйти</a>
 </div> <!-- Конец powered -->
 <img src="../images/logo.png" id="right_text" height="80px" width="80px" />
 <header id="header">
@@ -71,10 +83,11 @@ default; $faculty = 'Empty';break;
     <div id="left">
         <aside class= "sidebar-left">
             <ul>
-                <li><a href="logout.php">Выйти</a></li>
+                <li><a href="../files/docbox.html">Документооборот</a></li>
                 <li><a href="../files/changepass.html">Новый пароль</a></li>
                 <li><a href="../files/document.html">Написать</a></li>
                 <li><a href="../files/mailbox.html">Почта</a></li>
+                <li><a href="../files/rassylka.html">Рассылка</a></li>
             </ul>
         </aside>
     </div><!-- Конец левой колонки -->
@@ -108,7 +121,21 @@ default; $faculty = 'Empty';break;
                 </ul>
                 <ul class="rega">
                     <li><label>Куратор:</label></li>
-                    <li class="in"><input disabled="true" type="text" name="job" maxlength="20" value="null"></li>
+                    <li class="in"><input disabled="true" type="text" name="job" maxlength="20" value="<?php echo $resultmode['manage']?>"></li>
+                </ul>
+                <ul class="rega">
+                    <li><label>Подчиненные:</label></li>
+                    <li class="in">
+                        <select name="employee">
+                            <?php
+                            $i = 0;
+                            while(sizeof($managermode)>$i){
+                                echo '<option>'.$managermode[$i]['name'].' '.$managermode[$i]['surname'].'</option>';
+                                $i++;
+                            }
+                            ?>
+                        </select>
+                    </li>
                 </ul>
                 <ul class="rega">
                     <li class="in"><button type="accept" value="Edit" width="60px" height="20px">Edit</button></li>
@@ -132,8 +159,7 @@ default; $faculty = 'Empty';break;
 
 <div id="powered">
 
-    <a href="../index.html">Авторизация</a> |
-    <a href="../files/register.html">Регистрация</a><span>Команда <b>Oakmond Group</b> :: Сделано на <a href="http://www.symfony.com">Symfony2</a>  © Все права защищены </span>
+    <a href="logout.php">Выйти</a><span>Команда <b>Oakmond Group</b> :: Сделано на <a href="http://www.symfony.com">Symfony2</a>  © Все права защищены </span>
 </div>
 </div>
 </body>

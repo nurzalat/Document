@@ -89,8 +89,7 @@ switch($resultmode['faculty']){
 </head>
 <body>
 <div id="topmenu">
-    <a href="../index.html">Авторизация</a> |
-    <a href="../files/register.html">Регистрация</a>
+    <a href="logout.php">Выйти</a>
 </div> <!-- Конец powered -->
 <img src="../images/logo.png" id="right_text" height="80px" width="80px" />
 <header id="header">
@@ -100,9 +99,11 @@ switch($resultmode['faculty']){
     <div id="left">
         <aside class= "sidebar-left">
             <ul>
-                <li><a href="logout.php">Выйти</a></li>
+                <li><a href="../files/docbox.html">Документооборот</a></li>
                 <li><a href="../files/changepass.html">Новый пароль</a></li>
                 <li><a href="../files/document.html">Написать</a></li>
+                <li><a href="../files/mailbox.html">Почта</a></li>
+                <li><a href="../files/rassylka.html">Рассылка</a></li>
             </ul>
         </aside>
     </div><!-- Конец левой колонки -->
@@ -128,11 +129,11 @@ switch($resultmode['faculty']){
                 </ul>
                 <ul class="rega">
                     <li><label>Занятие:</label></li>
-                    <li class="in"><input type="text" name="job" maxlength="20" value="<?php echo $job?>"></li>
+                    <li class="in"><input type="text" disabled="true" name="job" maxlength="20" value="<?php echo $job?>"></li>
                 </ul>
                 <ul class="rega">
                     <li><label>Факультет:</label></li>
-                    <li class="in"><input type="text" name="job" maxlength="20" value="<?php echo $faculty?>"></li>
+                    <li class="in"><input type="text" disabled="true" name="job" maxlength="20" value="<?php echo $faculty?>"></li>
                 </ul>
                 <ul class="rega">
                     <li><label>Куратор:</label></li>
@@ -170,8 +171,7 @@ switch($resultmode['faculty']){
 
 <div id="powered">
 
-    <a href="../index.html">Авторизация</a> |
-    <a href="../files/register.html">Регистрация</a><span>Команда <b>Oakmond Group</b> :: Сделано на <a href="http://www.symfony.com">Symfony2</a>  © Все права защищены </span>
+    <a href="logout.php">Выйти</a><span>Команда <b>Oakmond Group</b> :: Сделано на <a href="http://www.symfony.com">Symfony2</a>  © Все права защищены </span>
 </div>
 </div>
 </body>

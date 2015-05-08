@@ -69,22 +69,21 @@ try {
         throw new Exception('Your password must be at least 6 characters long.'
             . 'Please go back and try again.');
     }
-    if (strlen($nick) > 16) {
-        throw new Exception('Your password must be less than 17 characters long.'
+    if (strlen($nick) > 20) {
+        throw new Exception('Your username must be less than 17 characters long.'
             . 'Please go back and try again.');
     }
-    if($option) {
+    if($option != (-1)) {
         echo htmlentities($_POST['jobselect'], ENT_QUOTES, "UTF-8");
     } else {
         echo "task option is required";
         exit;
     }
-    if($faculty) {
+    if($faculty != (-1)){
         echo htmlentities($_POST['faculty'], ENT_QUOTES, "UTF-8");
-    } elseif($_POST['jobselect']==0 && !$faculty) {
-        echo htmlentities($_POST['faculty']=0, ENT_QUOTES, "UTF-8");
-        exit;
-    }else{
+    }elseif( $option == 0 && $faculty == -1){
+        echo htmlentities($_POST['faculty'], ENT_QUOTES, "UTF-8");
+    } else{
         echo "task option is required";
         exit;
     }

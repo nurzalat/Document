@@ -1,10 +1,10 @@
-<?php require_once("connection.php");?>
-<?php
+<?php require_once("connection.php");
+session_start();
 $email = $_POST['email'];
 $name = $_POST['name'];
 $fname = $_POST['surname'];
 $nick = $_POST['nick'];
-$job = $_POST['job'];
+$option = isset($_POST['curator']) ? $_POST['curator'] : false;
 try {
     function filled_out($form_vars)
     {
@@ -35,17 +35,19 @@ try {
     {
         $conn = db_connect();
         $result = $conn->query("select * from usertable where username='$username'");
+        $resultmode = mysqli_fetch_assoc($result);
         if (!$result) {
             throw new Exception('Could not execute query.');
         }
-        if ($result->num_rows > 0) {
+        if(($resultmode['username']!=$_SESSION['session_username'])&&($result->num_rows > 0)){
             throw new Exception('That username is taken.'
                 . 'Please go back and choose another one.');
         }
-        $sql = "insert into usertable (name,surname,email,username,password,job) values ('$firstname','$lastname','$mail','$username','$option')";
-        $result = mysqli_query($conn,$sql);
-        if (!$result) {
-            throw new Exception('Could not register you in database.'
+        $sessionuser = $_SESSION['session_username'];
+        $sql = "UPDATE `usertable` SET `name`='$firstname',`surname`='$lastname',`email`='$mail',`username`='$username',`manage`='$option' WHERE `username`='$sessionuser'";
+        $results = mysqli_query($conn,$sql);
+        if (!$results) {
+            throw new Exception('Could not change your info in database.'
                 . 'Please try again later.'.mysqli_error($conn));
         }
         return true;
@@ -58,12 +60,18 @@ try {
         throw new Exception('That is not valid email address.'
             . 'please go back and try again.');
     }
+    if($option != (-1)) {
+        echo htmlentities($_POST['curator'], ENT_QUOTES, "UTF-8");
+        echo $option;
+    } else {
+        echo "task option is required";
+        exit;
+    }
     if (strlen($nick) > 16) {
-        throw new Exception('Your password must be less than 17 characters long.'
+        throw new Exception('Your username must be less than 17 characters long.'
             . 'Please go back and try again.');
     }
-    register($name, $fname, $email, $nick,$option);
-    session_start();
+    register($name, $fname, $email, $nick, $option);
     $_SESSION['session_username'] = $nick;
     header("Location: intropage.php");
 }

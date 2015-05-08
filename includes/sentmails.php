@@ -49,8 +49,7 @@ if (!$query) {
 </head>
 <body>
 <div id="topmenu">
-    <a href="../index.html">Авторизация</a> |
-    <a href="../files/register.html">Регистрация</a>
+    <a href="logout.php">Выйти</a>
 </div> <!-- Конец powered -->
 <img src="../images/logo.png" id="right_text" height="80px" width="80px" />
 <header id="header">
@@ -60,17 +59,18 @@ if (!$query) {
     <div id="left">
         <aside class= "sidebar-left">
             <ul>
-                <li><a href="logout.php">Выйти</a></li>
+                <li><a href="../files/docbox.html">Документооборот</a></li>
                 <li><a href="formdata.php">Личный кабинет</a></li>
                 <li><a href="../files/changepass.html">Новый пароль</a></li>
                 <li><a href="../files/document.html">Написать</a></li>
                 <li><a href="../files/mailbox.html">Почта</a></li>
+                <li><a href="../files/rassylka.html">Рассылка</a></li>
             </ul>
         </aside>
     </div><!-- Конец левой колонки -->
     <div id="center">
         <fieldset>
-            <legend><h1 align="left">Отправленные документы</h1></legend>
+            <legend><h1 align="left">Отправленные сообщения</h1></legend>
                             <?php
                             $i = 0;
                             while(sizeof($results_array)>$i){
@@ -80,7 +80,7 @@ if (!$query) {
                                     .'<li><label>Кому:</label></li><li class="in"><input type="text" name="touser" disabled="true" value="'.$results_array[$i]['touser'].'"><br /></li></ul><ul class="rega">'
                                     .'<li><label>Документ:</label></li><li class="in"><textarea name="message" disabled="true" cols="21" rows="3">'.$results_array[$i]['message'].'</textarea><br /></li></ul><ul class="rega">'
                                     .'<li><label>Дата:</label></li><li class="in"><input type="text" name="maildate" disabled="true" value="'.$results_array[$i]['date'].'"></li></ul><ul class="rega">'
-                                    .'<li class="in"><button type="accept" value="accept" width="60px" height="20px">Delete</button></li></ul></form></fieldset>';
+                                    .'</form></fieldset>';
                                 $i++;
                             }
                             ?>
@@ -102,8 +102,7 @@ if (!$query) {
 
 <div id="powered">
 
-    <a href="../index.html">Авторизация</a> |
-    <a href="../files/register.html">Регистрация</a><span>Команда <b>Oakmond Group</b> :: Сделано на <a href="http://www.symfony.com">Symfony2</a>  © Все права защищены </span>
+    <a href="logout.php">Выйти</a><span>Команда <b>Oakmond Group</b> :: Сделано на <a href="http://www.symfony.com">Symfony2</a>  © Все права защищены </span>
 </div>
 </div>
 </body>

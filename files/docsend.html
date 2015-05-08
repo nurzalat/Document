@@ -1,5 +1,3 @@
-<!-- /src/YourIdentifier/YourBundle/Resources/views/Page/static/base2.html.twig -->
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
 <head>
@@ -10,39 +8,62 @@
     <![endif]-->
     <link rel ="shortcut icon" href= "favicon.ico" />
     <link href="../css/main.css" rel="stylesheet" media="screen">
+    <style>
+        ul.rega{
+            width:350px;
+        }
+
+        ul.rega li{
+            float:left;
+            width:100px;
+            list-style:none;
+        }
+
+        ul.rega li.in{
+            width:250px;
+            list-style:none;
+        }
+    </style>
 </head>
 <body>
 <div id="topmenu">
     <a href="../includes/logout.php">Выйти</a>
 </div> <!-- Конец powered -->
-
+<img src="../images/logo.png" id="right_text" height="80px" width="80px" />
 <header id="header">
-    <img src="../images/logo.png" id="right_text" height="60px" width="60px" />
     <h2 color="white">ManasCloud </h2>
 </header>
 <div id="columns">
-
     <div id="left">
         <aside class= "sidebar-left">
             <ul>
                 <li><a href="docbox.html">Документооборот</a></li>
-                <li><a href="changepass.html">Новый пароль</a></li>
                 <li><a href="../includes/formdata.php">Личный кабинет</a></li>
                 <li><a href="document.html">Написать</a></li>
+                <li><a href="changepass.html">Новый пароль</a></li>
+                <li><a href="mailbox.html">Почта</a></li>
                 <li><a href="rassylka.html">Рассылка</a></li>
             </ul>
         </aside>
     </div><!-- Конец левой колонки -->
     <div id="center">
-        <div id="loginform">
-            <section class= "main">
-                <fieldset>
-                    <legend><h1 align="left"><span><?php echo $_SESSION['session_username'];?></span>Почта</h1></legend>
-                        <h3 align="left"><label><a href="../includes/sentmails.php">Отправленные сообщения</a></label>
-                        <h3 align="left"><label><a href="../includes/receivedmails.php">Принятые сообщения</a></label>
-                </fieldset>
-            </section>
-        </div>
+        <fieldset>
+            <legend><h1 align="left">Документ:</h1></legend>
+            <form action="../includes/docsend.php" method="POST" name="form1">
+                <ul class="rega">
+                    <li><label>Тема:</label></li>
+                    <li class="in"><input type="text" name="subject" maxlength="30"></li>
+                </ul>
+                <ul class="rega">
+                    <li><label>Форма:</label></li>
+                    <li class="in"><textarea name="message" cols="30" rows="10"></textarea></li>
+                </ul>
+                <ul class="rega">
+                    <li></li>
+                    <li class="in"><p><input type="image" src="../images/sendo.jpg" name="imageButton" width="60" height="25"></p></li>
+                </ul>
+            </form>
+        </fieldset>
     </div> <!-- Конец центральной колонки -->
 
 
@@ -61,6 +82,6 @@
 
     <a href="../includes/logout.php">Выйти</a><span>Команда <b>Oakmond Group</b> :: Сделано на <a href="http://www.symfony.com">Symfony2</a>  © Все права защищены </span>
 </div>
-
+</div>
 </body>
 </html>

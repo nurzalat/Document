@@ -10,10 +10,7 @@ function db_connect()
 }
 $conn = db_connect();
 $username = $_SESSION['session_username'];
-$query = "select * from mailboxreceive where touser='$username'";
-//$sqlquery = mysqli_query($conn,$query);
-//$sqlres = mysqli_fetch_assoc($sqlquery);
-//$sqlarray = mysqli_fetch_all($sqlquery,MYSQLI_NUM);
+$query = "select * from docbox where receivinguser='$username' OR sendinguser='$username'";
 $results_array = array();
 $sqlresult = $conn->query($query);
 while ($row = $sqlresult->fetch_assoc()) {
@@ -73,22 +70,23 @@ if (!$query) {
     </div><!-- Конец левой колонки -->
     <div id="center">
         <fieldset>
-            <legend><h1 align="left">Принятые сообщения</h1></legend>
+            <legend><h1 align="left">Архив документооборота</h1></legend>
             <form action="deletereceive.php" method="post">
-            <?php
-            $i = 0;
-            while(sizeof($results_array)>$i){
-                $date = $results_array[$i]['date'];
-                echo '<fieldset><legend><h2 align="left">'.$results_array[$i]['subject'].'</h2></legend>'
-                    .'<style>ul.rega{  width:400px;  }  ul.rega li{  float:left;  width:150px;  list-style:none;  }  ul.rega li.in{  width:250px;  list-style:none;  }</style>'
-                    .'<ul class="rega">'
-                    .'<li><label>От кого:</label></li><li class="in"><input type="text" name="fromuser"'.$i.' disabled="true" value="'.$results_array[$i]['fromuser'].'"><br /></li></ul><ul class="rega">'
-                    .'<li><label>Документ:</label></li><li class="in"><textarea name="message"'.$i.' disabled="true" cols="45" rows="5">'.$results_array[$i]['message'].'</textarea><br /></li></ul><ul class="rega">'
-                    .'<li><label>Дата:</label></li><li class="in"><input type="text" name="maildate"'.$i.' disabled="true" value="'.$results_array[$i]['date'].'"></li></ul><ul class="rega">'
-                    .'</fieldset>';
-                $i++;
-            }
-            ?>
+                <?php
+                $i = 0;
+                while(sizeof($results_array)>$i){
+                    $date = $results_array[$i]['date'];
+                    echo '<fieldset><legend><h2 align="left">'.$results_array[$i]['subject'].'</h2></legend>'
+                        .'<style>ul.rega{  width:400px;  }  ul.rega li{  float:left;  width:150px;  list-style:none;  }  ul.rega li.in{  width:250px;  list-style:none;  }</style>'
+                        .'<ul class="rega">'
+                        .'<li><label>От кого:</label></li><li class="in"><input type="text" name="fromuser" disabled="true" value="'.$results_array[$i]['sendinguser'].'"><br /></li></ul><ul class="rega">'
+                        .'<li><label>Документ:</label></li><li class="in"><textarea name="message" disabled="true" cols="45" rows="7">'.$results_array[$i]['document'].'</textarea><br /></li></ul><ul class="rega">'
+                        .'<li><label>Дата:</label></li><li class="in"><input type="text" name="maildate" disabled="true" value="'.$results_array[$i]['date'].'"></li></ul><ul class="rega">'
+                        .'<li><label>Статус:</label></li><li class="in"><input type="text" name="status" disabled="true" value="'.$results_array[$i]['status'].'"></li></ul><ul class="rega">'
+                        .'</fieldset>';
+                    $i++;
+                }
+                ?>
             </form>
         </fieldset>
 
